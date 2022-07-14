@@ -8,6 +8,8 @@ module.exports = {
   customSyntax: 'postcss-html',
   rules: {
     indentation: 2,
+    'selector-class-pattern': '^([a-z][a-z0-9]*)(-+[a-z0-9]+)*$',
+
     'selector-pseudo-element-no-unknown': [
       true,
       {
@@ -23,7 +25,7 @@ module.exports = {
     'no-empty-source': null,
     'selector-pseudo-class-no-unknown': [
       true,
-      { ignorePseudoClasses: ['global'] }
+      { ignorePseudoClasses: ['global', 'deep'] }
     ]
   }
 }
