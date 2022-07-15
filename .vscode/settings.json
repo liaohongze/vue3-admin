@@ -9,5 +9,6 @@
     "typescriptreact"
   ],
   "eslint.alwaysShowStatus": true,
-  "stylelint.validate": ["css", "less", "postcss", "scss", "vue", "sass"]
+  "stylelint.validate": ["css", "less", "postcss", "scss", "vue", "sass"],
+  "files.eol": "\n"
 }
