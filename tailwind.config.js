@@ -1,8 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+  purge: ['./src/**/*.html', './src/**/*.vue', './src/**/*.jsx'],
   theme: {
     extend: {
+      screens: {
+        sm: { max: '640px' }
+      },
+
       width: {
         0: '0',
         5: '5px',
@@ -96,6 +101,7 @@ module.exports = {
         400: '400px',
         500: '500px',
         660: '660px',
+        720: '720px',
         calc84: 'calc(100vh - 84px)'
       },
 
@@ -143,7 +149,11 @@ module.exports = {
       }
     }
   },
-  plugins: []
+  plugins: [
+    import('postcss-import'),
+    import('tailwindcss'),
+    import('autoprefixer')
+  ]
 }
 
 // 偶数
