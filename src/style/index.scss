@@ -1,0 +1,554 @@
+.clearfix {
+  &:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+  }
+}
+
+code {
+  background: #eef1f6;
+  padding: 15px 16px;
+  margin-bottom: 20px;
+  display: block;
+  line-height: 32px;
+  font-size: 14px;
+  font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+  a {
+    color: #337ab7;
+    cursor: pointer;
+    &:hover {
+      color: rgb(32, 160, 255);
+    }
+  }
+}
+
+.warn-content{
+  background: rgba(66,185,131,.1);
+  border-radius: 2px;
+  padding: 16px;
+  padding: 1rem;
+  line-height: 1.6rem;
+  word-spacing: .05rem;
+  a{
+    color: #42b983;
+    font-weight: 600;
+  }
+}
+
+//main-container全局样式
+.app-container {
+  margin: 20px 20px 0 20px;
+}
+
+.link-type,
+.link-type:focus {
+  color: #2979ff;
+  cursor: pointer;
+  &:hover {
+    color:rgb(102, 183, 245);
+  }
+}
+//refine vue-multiselect plugin
+.multiselect {
+  min-height: auto;
+  line-height: 16px;
+  min-height: 36px!important;
+}
+.multiselect__select{
+  height: 36px!important;
+}
+.multiselect__select:before{
+  top: 62% !important;
+}
+.multiselect__tags{
+  min-height: 32px!important;
+  display: block;
+  padding: 8px 40px 0 8px;
+  border-radius: 2px !important;
+  border: 1px solid #e8e8e8;
+  background: #fff;
+}
+.multiselect__input,
+.multiselect__single{
+  margin-bottom: 6px!important;
+}
+.multiselect--active {
+  z-index: 1000 !important;
+}
+
+// el-form-item 提示文本
+.el-form-tip {
+  margin-left: 15px;
+  color: #999;
+  font-size: 12px;
+}
+
+.el-form-tip2 {
+  margin-left: 30px;
+  color: #999;
+  font-size: 14px;
+}
+.el-form-tip-remark {
+  color: #999;
+  font-size: 12px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  line-height: 1;
+}
+.filter {
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,.7);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+}
+button.search,button.search:focus {
+  color: #fff;
+  background-color:#304156;
+  border:none;
+  padding: 11px 20px;
+}
+
+button.search:hover {
+  color: #fff;
+  background-color: #304156;
+  padding: 11px 20px;
+}
+b{
+  color: #2979FF;
+  // padding: 0 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}
+b:hover{
+  color: #0a76a4;
+}
+
+.c-bd1-transparent{ border: 1px solid transparent; }
+.c-bd1-fff{ border: 1px solid #fff; }
+.c-bd1-xsgray{ border: 1px solid #F2F2F2; }
+.c-bd1-dcdfe6{ border:1px solid #DCDFE6; }
+.c-bd1-ccc{ border: 1px solid #ccc; }
+.c-bd1-e5{border: 1px solid #e5e5e5;}
+.c-bd1-ed{border:1px solid #ededed;}
+.c-bd1-blue{ border: 1px solid #2979FF;}
+.c-bd1-red{ border: 1px solid #d60808; }
+.c-bd1-fred{ border: 1px solid #FF4040; }
+.c-bd1-ffdeae{border:1px solid #ffdeae;}
+
+.c-bd2-transparent{ border: 2px solid transparent; }
+.c-bd2-blue{ border: 2px solid #2979FF; }
+.c-bd2-orange{ border: 2px solid #FF7800;}
+.c-bd2-xsgray{ border: 2px solid #F2F2F2; }
+
+.c-bd8-black{ border: 8px solid rgba(0, 0, 0, 0.8); }
+
+.c-bds-ccc{border:1px dashed #ccc;}
+.c-bds-e6{border: 1px dashed #e6e6e6;}
+.c-bds-a6b7c9{border: 1px dashed #a6b7c9;}
+.c-bdashed-blue{ border: 1px dashed #2979FF;}
+.c-bdotted-blue{ border: 2px dotted #2979FF; }
+
+.c-bl1-ccc{border-left:1px solid #ccc;}
+.c-bl1-xsgray{border-left:1px solid #f2f2f2;}
+.c-bl2-blue{border-left:2px solid #2979FF;}
+.c-bl8-blue{border-left:8px solid #2979FF;}
+
+.c-br1-ccc{border-right:1px solid #ccc;}
+.c-br1-xsgray{border-right:1px solid #f2f2f2;}
+.c-br1-e5{border-right:1px solid #e5e5e5;}
+
+.c-bt1-xsgray{ border-top: 1px solid #f2f2f2;}
+.c-bt1-e5{ border-top: 1px solid #e5e5e5; }
+.c-bt1-ccc{border-top:1px solid #ccc;}
+.c-bt1-999{ border-top: 1px solid #999; }
+
+
+.c-bm1-xsgray{border-bottom:1px solid #F2F2F2;}
+.c-bm1-xxsgray{ border-bottom: 1px solid #F8F9FB; }
+.c-bm2-xxsgray{ border-bottom: 2px solid #F8F9FB; }
+.c-bm10-xxsgray{ border-bottom: 10px solid #F8F9FB; }
+.c-bm2-transparent{ border-bottom: 2px solid transparent; }
+.c-bm1-ed{border-bottom:1px solid #ededed;}
+.c-bm1-e5{ border-bottom: 1px solid #e5e5e5; }
+.c-bmd1-e5{ border-bottom: 1px dashed #e5e5e5; }
+.c-bm1-eee{ border-bottom: 1px solid #eee; }
+.c-bm1-ccc{border-bottom:1px solid #ccc;}
+.c-bmd2-b2{ border-bottom: 2px dashed #b2b2b2;}
+.c-bm1-blue{ border-bottom: 1px solid #2979FF;}
+.c-bm2-blue{ border-bottom: 2px solid #2979FF; }
+.c-bm4-blue{ border-bottom: 4px solid #2979FF; }
+.c-bm5-blue{ border-bottom: 5px solid #2979FF; }
+.c-bm1-ff7800{ border-bottom: 2px solid #ff7800;}
+
+.c-text-ellipsis3{
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  word-wrap: break-word;
+  overflow: hidden;
+  /* autoprefixer: off */
+  -webkit-box-orient: vertical;
+}
+.c-text-ellipsis2{
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /*! autoprefixer: off */
+  -webkit-box-orient: vertical;
+}
+
+.c-text-ellipsis1{
+  text-overflow:ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.c-fc-white{ color: #fff; }
+.c-fc-ccc{ color: #ccc; }
+.c-fc-c0c4cc {color:#c0c4cc;}
+.c-fc-sgray{ color: #999; }
+.c-fc-666{color: #666;}
+.c-fc-333{color: #333;}
+.c-fc-red{ color: red; }
+.c-fc-fred{ color: #FF4040; }
+.c-fc-FC6882{color:#FC6882}
+.c-fc-BE363A{color:#BE363A}
+.c-fc-DB4C51{color:#DB4C51}
+.c-fc-F5D199{color: #F5D199;}
+.c-fc-sblue {color: #A6B7C9}
+.c-fc-blue{ color: #2979FF; }
+.c-fc-526FE6 {color: #5069cc}
+.c-fc-green{ color: #2AD66E; }
+.c-fc-FF632D{color:#FF632D}
+.c-fc-orange{color: #FF7800;}
+.c-fc-FFA21A{ color: #FFA21A}
+.c-fc-FE9900 {color: #FE9900;}
+.c-fc-yellow{ color: #F8C342; }
+.c-fc-A0701C{color: #A0701C;}
+.c-fc-B39B84{color: #B39B84}
+.c-fc-FFD9B6{color:#FFD9B6}
+
+.zIndex-1{z-index: -1}
+.zIndex1{z-index: 1}
+.zIndex5{z-index: 5}
+.zIndex10{z-index: 10}
+.zIndex11{z-index: 11}
+
+.c-bg-white{ background-color: #fff; }
+.c-bg-fa{ background-color: #fafafa; }
+.c-bg-eee{ background-color: #eee; }
+.c-bg-E4EAF2 {background-color: #E4EAF2;}
+.c-bg-F8F9FB{ background-color: #F8F9FB;}
+.c-bg-fffaf2{ background-color: #fffaf2; }
+.c-bg-ccc{ background-color: #ccc; }
+.c-bg-666{background-color: #666666;}
+.c-bg-303945{ background-color: #303945; }
+.c-bg-black{ background-color: #000; }
+.c-bg-sblack{ background-color: rgba(0, 0, 0, 0.5); }
+.c-bg-blue{ background-color: #2979FF; }
+.c-bg-mblue{background-color: #7F94FF;}
+.c-bg-sblue { background-color: #C5DDF4; }
+.c-bg-defaultBlue {background-color: #D8E5FA;}
+.c-bg-9bcbfc{ background-color: #9bcbfc; }
+.c-bg-fred{background-color: #FF4040;}
+.c-bg-DB4C51{background-color: #DB4C51;}
+.c-bg-BA483E{background-color:#BA483E}
+.c-bg-ff6960{ background-color: #ff6960; }
+.c-bg-FC6882{background-color: #FC6882;}
+.c-bg-fab0ad{ background-color: #fab0ad; }
+.c-bg-fad0a2{ background-color: #fad0a2; }
+.c-bg-FFA84B {background-color: #FFA84B;}
+.c-bg-FF9256{background-color: #FF9256;}
+.c-bg-green{background-color: #5cc747;}
+.c-bg-spurple{background-color: #975FE5;}
+.c-bg-lg270-xred{background: linear-gradient(270deg,#ff5f4f, #eb3f4d);}
+.c-bg-lg270-sgreen{background: linear-gradient(270deg,#26e2da, #00c3bb);}
+.c-bg-lg270-xblue{background: linear-gradient(270deg,#3987ff, #5050f9);}
+.c-bg-lg270-xorange{background: linear-gradient(270deg,#ffb25f, #ff7430);}
+.c-bg-lg270-mblue{background: linear-gradient(270deg,#3fb6eb, #4f8aff);}
+
+.square {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: #2979FF;
+  margin-right: 10px;
+}
+
+.box-shadow-black {
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+}
+.c-box-shadow1:hover{
+  box-shadow:0px 1px 15px 0px rgba(0, 0, 0, 0.1);
+}
+.c-box-shadow2{
+  box-shadow: 0px 3px 4px 0px rgba(183,187,244,0.2);
+  // box-shadow:0px 3px 4px 0px rgba(183, 187, 244, 0.2);
+}
+.c-box-shadow3{
+  box-shadow:0px 2px 8px 0px rgba(0, 0, 0, 0.02);
+}
+.c-box-shadow4 {
+  box-shadow:0px 3px 10px 0px rgba(0, 0, 0, 0.1);
+}
+.c-box-shadow5 {
+  box-shadow:0px 3px 10px 0px rgba(0, 0, 0, 0.05);
+}
+.c-box-shadow6 {
+  box-shadow:0px 5px 15px 0px rgba(64,158,255,0.2);
+}
+.c-box-shadow7 {
+  box-shadow:0px 0px 4px 0px rgba(0,0,0,0.1)
+}
+.c-box-shadow8 {
+  box-shadow:0px 0px 15px 0px rgba(0,0,0,0.1)
+}
+.c-box-shadow9 {
+  box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.05)
+}
+.c-box-shadow10 {
+  box-shadow: 0px -5px 20px 0px rgba(0,0,0,0.05)
+}
+.c-box-shadow11 {
+  box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.10); 
+}
+.tdedit {
+  display: inline;
+  background: url(../assets/tdedit.gif) no-repeat no-repeat right 0;
+  padding-right: 14px;
+}
+.el-dropdown-link {
+  font-size: 14px;
+  padding: 0px;
+  cursor: pointer;
+  color: #2979FF;
+}
+
+.sign {
+  display: inline-block;
+  width: 2px;
+  height: 12px;
+  background-color: #38A3FF;
+}
+.tableData .el-table__header, .tableData .el-table__body{
+  width: 100%!important;
+}
+.el-btn {
+  color: #2979FF;
+  border: 1px solid #2979FF;
+}
+.el-btn-disabled {
+  color: #c0c4cc;
+  border: 1px solid #c0c4cc;
+}
+// 编辑器样式
+.mce-tinymce {
+  box-shadow: none !important;
+}
+.mce-top-part::before {
+  box-shadow: none !important;
+}
+.mce-menubar {
+  border: none !important;
+}
+
+.c-scroll {
+  overflow: auto;
+  /*滚动条整体部分,必须要设置*/
+    &::-webkit-scrollbar{
+        width: 6px;
+        height: 10px;
+        background-color: #fff;
+    }
+    /*滚动条的轨道*/
+    &::-webkit-scrollbar-track{
+        // box-shadow: inset 0 0 5px #fff;
+        // background-color: transparent;
+    }
+    /*滚动条的滑块按钮*/
+    &::-webkit-scrollbar-thumb{
+        border-radius: 10px;
+        background-color: #e5e5e5;
+        // box-shadow: inset 0 0 5px #fff;
+    }
+    /*滚动条的上下两端的按钮*/
+    &::-webkit-scrollbar-button{
+        height: 0;
+        // background-color: #B0AEDA;
+    }
+}
+.c-layerwrap-in{width:100%;height: 100%; position: absolute; top:0; left:0; z-index:1; background:rgba(0,0,0,0.5); filter:progid:DXImageTransform.Microsoft.gradient(startcolorstr=#99000000,endcolorstr=#99000000,gradientType=0);}
+
+// 新版样式
+.nav-box-info .el-menu--horizontal {
+  box-sizing: content-box;
+  border-bottom: 1px solid #f2f2f2;
+}
+.limit-img-size img{
+  max-width: 100%;
+}
+
+/** hover 样式 */
+.hover-blue:hover{
+  color: #2979FF;
+}
+.hover-lblue:hover{
+  color: #0a76a4;
+}
+.hover-bg-white:hover {
+  background-color: white;
+}
+.hover-bg-blue:hover {
+  background-color: #2979FF;
+}
+.hover-bg-f5:hover {
+  background-color: #f5f7fa;
+}
+.hover-bg-f5f5f5:hover {
+  background-color: #f5f5f5;
+}
+.hover-border2-blue:hover {
+  border: 2px solid #2979FF;
+}
+
+
+// 表单设置蓝色竖线
+.v-line+.v-line::before {
+  content: '|';
+  color: #2979FF;
+  padding: 0 5px 0 3px;
+  font-weight: normal;
+  font-size: 14px;
+}
+
+// 新增页面那些标题  基本信息  售卖方式的样式
+.form-title {
+  font-family: SimHei;
+  font-weight: bold;
+  margin-top: 40px;
+  margin-bottom: 30px;
+  color: #333;
+  font-size: 16px;
+}
+
+// 新增编辑页面的字数限制样式 0/50
+.word-limit-tips{
+  color: #ccc;
+  // background-color: #fff;
+  height: 34px;
+  line-height: 34px;
+  border-radius: 4px;
+  // padding-left: 4px;
+  padding-right: 4px;
+  position: absolute;
+  right: 1px;
+  bottom: 1px;
+}
+.word-limit-textareaTips{ // 各个新增编辑页的字数限制样式
+  height: 31px;
+  line-height: 31px;
+  bottom: 1px;
+}
+.word-limit-input .el-input__inner{ // 单行文本框
+  padding-right: 55px;
+}
+.word-limit-input-max .el-input__inner{ // 单行文本框
+  padding-right: 65px;
+}
+.word-limit-input .el-textarea__inner{ // 多行文本框
+  padding-right: 55px;
+}
+
+// 备注的样式1 这个蓝色边框的 浅蓝色的底色 黑字
+.c-remark1{
+  width: 100%;
+  border:1px solid #ffdeae;
+  background-color: #fffaf2;
+  color: #333;
+  font-size: 12px;
+  padding-left: 20px;
+  line-height: 28px;
+}
+// 备注的样式2 这个黄色边框的 浅黄色的底色 文字666
+.c-remark2{
+
+}
+
+@media only screen and (max-width: 640px){
+  .mp-hide{display: none;}
+  .mp-show{display: block;}
+
+  .mp-w100{width: 100%;}
+  .mp-w80{width: 80%;}
+
+  .mp-textAlign-c{text-align: center;}
+
+  .mp-mt20 {margin-top: 20px !important;}
+
+  .mp-mb20 {margin-bottom: 20px;}
+
+  .mp-mh0{margin-left: 0px;margin-right: 0px;}
+
+  .mp-ph0{padding-left: 0;padding-right: 0;}
+  .mp-ph20{padding-left: 20px;padding-right: 20px;}
+
+  .mp-pb0{padding-bottom: 0;}
+  .mp-pv0{padding-top: 0;padding-bottom: 0;}
+}
+
+// 素材库被删除，引用的地方的提示（表格）
+.material-del-tip{ // c-fc-fred c-fs-12 c-bd1-fred c-ph5 c-pv2 c-bg-fpink border-radio2 margin-r5
+  color: #FF4040;
+  font-size: 12px;
+  border: 1px solid #FF4040;
+  padding: 2px 5px;
+  background-color: #ffebed;
+  border-radius: 2px;
+  margin-right: 5px;
+}
+
+// 按钮固定底部
+.btnBoxFixed{
+  position: fixed;
+  bottom: 0;
+  width: 85%;
+  background: #fff;
+  z-index: 5;
+}
+// 按钮固定表单底部
+.btnBoxFixedForm {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding-left: 180px;
+  z-index: 4;
+  @extend .box-sizing;
+  @extend .c-flex-row;
+  @extend .c-aligni-center;
+  @extend .c-justify-center;
+  @extend .c-box-shadow10;
+  @extend .c-bg-white;
+  @extend .height60;
+  .el-button + .el-button {
+    margin-left: 15px;
+  }
+}
+.c-no-margin-tabs .el-tabs__header{
+  margin: 0;
+}
+.el-tabs__item{
+  font-weight:normal;
+}
+.c-template13-img-h100 img {
+  min-height: 455px;
+  width: 100%;
+}
