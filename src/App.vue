@@ -1,90 +1,38 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
-    <img
-      alt="Vue logo"
-      class="logo"
-      src="@/assets/logo.svg"
-      width="125"
-      height="125"
-    />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
+  <div id="app" class="h-screen overflow-y-hidden">
+    <RouterView />
+  </div>
 </template>
 
+<script setup lang="ts">
+import { RouterView } from 'vue-router'
+import { provide } from 'vue'
+
+provide('tableHeadStyle', {
+  'font-family': 'PingFangSC-Semibold',
+  backgroundColor: '#f5f7fa',
+  color: '#333333'
+})
+provide('tableCss', 'c-width100 c-fc-333 family-PingFangSC-Regular c-fs-12')
+provide('pageSizes', [10, 20, 30, 40])
+</script>
+
 <style lang="scss" scoped>
-header {
-  max-height: 100vh;
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
+.mask-moudle {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  display: none;
   width: 100%;
-  margin-top: 2rem;
-  font-size: 12px;
-  text-align: center;
+  height: 100%;
+  background: black;
+  opacity: 0.2;
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    margin-top: 1rem;
-    margin-left: -1rem;
-    padding: 1rem 0;
-    font-size: 1rem;
-    text-align: left;
-  }
+.mask-show {
+  display: block;
 }
 </style>
