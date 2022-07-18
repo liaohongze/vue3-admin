@@ -531,13 +531,13 @@ b:hover{
   width: 100%;
   padding-left: 180px;
   z-index: 4;
-  @extend .box-sizing;
-  @extend .c-flex-row;
-  @extend .c-aligni-center;
-  @extend .c-justify-center;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height:60px;
   @extend .c-box-shadow10;
   @extend .c-bg-white;
-  @extend .height60;
   .el-button + .el-button {
     margin-left: 15px;
   }
