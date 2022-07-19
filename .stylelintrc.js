@@ -20,6 +20,7 @@ module.exports = {
     'at-rule-no-unknown': null,
     'no-duplicate-selectors': null,
     'no-empty-source': null,
+    'string-quotes': 'single',
     'selector-pseudo-class-no-unknown': [
       true,
       { ignorePseudoClasses: ['global', 'deep'] }
