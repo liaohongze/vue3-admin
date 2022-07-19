@@ -13,16 +13,14 @@
     >
       <div class="w-420 sm:hidden">
         <img
-          v-for="(item, index) in loginBanner"
-          :key="index"
+          :src="`${imgWebUrl}/assets/loginBanner/banner.jpg`"
           alt=""
           class="w-full h-fulll"
-          :src="item.imgUrl"
         />
       </div>
 
       <div class="mx-auto w-400 px-10 sm:w-80p">
-        <ContactUs v-if="contactUsVisible" v-model="contactUsVisible" />
+        <contactUs v-if="contactUsVisible" v-model="contactUsVisible" />
 
         <template v-else>
           <div class="flex flex-row justify-center items-center pt-35 mb50">
@@ -41,12 +39,20 @@
               {{ item.title }}
             </div>
           </div>
+
+          <el-form
+            ref="loginForm"
+            :model="loginForm"
+            :rules="loginRules"
+            label-position="left"
+            class="loginForm"
+          >
+            <component :is="loginComponents[loginType]" />
+          </el-form>
         </template>
 
         <div class="flex flex-row items-center justify-between mb-10 text-14">
-          <div class="flex flex-row items-center">
-            <span class="ml-5 text-14">阅读并同意</span>
-          </div>
+          <el-checkbox v-model="isCheckedService">阅读并同意</el-checkbox>
 
           <div class="flex flex-row">
             <div class="text-center c-fc-666">
@@ -77,23 +83,25 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, markRaw } from 'vue'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 
 import { imgWebUrl } from '@/constants/global'
-import ContactUs from './part/contactUs.vue'
 
-const loginBanner = reactive([
-  {
-    imgUrl: `${imgWebUrl}/assets/loginBanner/banner.jpg`,
-    value: 1
-  }
-])
+import contactUs from './part/contactUs.vue'
+import password from './part/password.vue'
+import code from './part/code.vue'
 
 // const loadCaptcha = () => {
 
 // }
+const isCheckedService = ref<boolean>(true)
+
+const loginComponents = reactive({
+  password: markRaw(password),
+  code: markRaw(code)
+})
 
 const loginType = ref<string>('password')
 const loginTypeOptions = reactive([
@@ -111,4 +119,18 @@ const modifyPassword = () => {
 }
 
 const contactUsVisible = ref<boolean>(false)
+
+// 登录
+const loginForm = reactive({
+  username: '',
+  password: '',
+  captcha: '',
+  captchaKey: null,
+  mobile: '',
+  // code: '',
+  validCode: '', // 短信验证码
+  checkKey: '' // 时间戳，获取图形验证码用
+})
+
+const loginRules = reactive({})
 </script>
