@@ -41,13 +41,16 @@
           </div>
 
           <el-form
-            ref="loginForm"
+            ref="loginFormRef"
             :model="loginForm"
             :rules="loginRules"
             label-position="left"
             class="loginForm"
           >
-            <component :is="loginComponents[loginType]" />
+            <component
+              :is="loginComponents[loginType]"
+              :login-form="loginForm"
+            />
           </el-form>
         </template>
 
@@ -84,8 +87,7 @@
 
 <script lang="ts" setup>
 import { ref, reactive, markRaw } from 'vue'
-import { useRouter } from 'vue-router'
-const router = useRouter()
+import type { FormInstance } from 'element-plus'
 
 import { imgWebUrl } from '@/constants/global'
 
@@ -93,26 +95,31 @@ import contactUs from './part/contactUs.vue'
 import password from './part/password.vue'
 import code from './part/code.vue'
 
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
 // const loadCaptcha = () => {
 
 // }
 const isCheckedService = ref<boolean>(true)
 
-const loginComponents = reactive({
+const loginComponents: Record<string, any> = reactive({
   password: markRaw(password),
   code: markRaw(code)
 })
 
+// 切换登录方式 开始
 const loginType = ref<string>('password')
 const loginTypeOptions = reactive([
   { type: 'password', title: '密码登录' },
   { type: 'code', title: '验证码登录' }
 ])
 
-const loginTypeChange = item => {
+const loginTypeChange = (item: any) => {
   // loadCaptcha()
   loginType.value = item.type
 }
+// 切换登录方式 结束
 
 const modifyPassword = () => {
   router.push({ name: 'modifyPassword' })
@@ -121,6 +128,8 @@ const modifyPassword = () => {
 const contactUsVisible = ref<boolean>(false)
 
 // 登录
+const loginFormRef = ref<FormInstance>()
+
 const loginForm = reactive({
   username: '',
   password: '',
@@ -132,5 +141,53 @@ const loginForm = reactive({
   checkKey: '' // 时间戳，获取图形验证码用
 })
 
-const loginRules = reactive({})
+const validateUsername = (rule: any, value: any, callback: any) => {
+  if (!value || value.trim() == '') {
+    callback(new Error('请输入手机号'))
+  } else {
+    callback()
+  }
+}
+const validatePassword = (rule: any, value: any, callback: any) => {
+  if (!value || value.trim() == '') {
+    callback(new Error('请输入密码'))
+  } else {
+    callback()
+  }
+}
+const validateCaptcha = (rule: any, value: any, callback: any) => {
+  if (!value) {
+    callback(new Error('请输入验证码'))
+  } else {
+    callback()
+  }
+}
+
+const loginRules = reactive({
+  username: [{ required: true, trigger: 'blur', validator: validateUsername }],
+  password: [{ required: true, trigger: 'blur', validator: validatePassword }],
+  captcha: [{ required: true, trigger: 'blur', validator: validateCaptcha }],
+  mobile: [{ required: true, trigger: 'blur', message: '请输入手机号' }],
+  validCode: [{ required: true, trigger: 'blur', validator: validateCaptcha }]
+})
 </script>
+
+<style lang="scss" scoped>
+.loginForm :deep(.el-input__inner) {
+  padding-right: 0;
+  padding-bottom: 14px;
+  padding-left: 0;
+  font-size: 16px;
+  border: 0;
+  border-bottom: 1px solid #dbdee0;
+}
+
+.loginForm :deep(.el-form-item.is-error .el-input__inner) {
+  border: 0;
+  border-bottom: 1px solid #f56c6c;
+}
+
+.loginForm :deep(.el-form-item) {
+  margin-bottom: 27px;
+}
+</style>

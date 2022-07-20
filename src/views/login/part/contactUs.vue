@@ -33,7 +33,7 @@
 import { imgWebUrl } from '@/constants/global'
 
 type Props = {
-  contactUsVisible: boolean
+  modelValue: boolean
 }
 defineProps<Props>()
 
