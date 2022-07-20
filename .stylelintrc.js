@@ -8,12 +8,7 @@ module.exports = {
   customSyntax: 'postcss-html',
   rules: {
     indentation: 2,
-    'selector-pseudo-element-no-unknown': [
-      true,
-      {
-        ignorePseudoElements: ['v-deep']
-      }
-    ],
+    'selector-class-pattern': null,
     'no-descending-specificity': null,
     'font-family-no-missing-generic-family-keyword': null,
     'selector-type-no-unknown': null,
