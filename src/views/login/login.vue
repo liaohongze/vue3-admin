@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col justify-between h-full min-h-720 pb-50 overflow-hidden"
+    class="flex flex-col justify-between h-full min-h-720 pb-50 overflow-hidden c-bg-F8F9FB"
   >
     <div class="pt-15 pl-30 sm:pl-0 sm:text-center">
       <a href="http://www.ckjr001.com" target="blank"
@@ -19,46 +19,69 @@
         />
       </div>
 
-      <div class="mx-auto w-400 px-10 sm:w-80p">
-        <contactUs v-if="contactUsVisible" v-model="contactUsVisible" />
+      <div class="flex-1 pt-20 pb-30 c-bg-white">
+        <div class="mx-auto w-400 px-10 sm:w-80p">
+          <contactUs v-if="contactUsVisible" v-model="contactUsVisible" />
 
-        <template v-else>
-          <div class="flex flex-row justify-center items-center pt-35 mb50">
-            <div
-              v-for="(item, index) in loginTypeOptions"
-              :key="index"
-              class="cursor-pointer"
-              :class="{
-                'mr-30': index < loginTypeOptions.length - 1,
-                'text-18 c-fc-sgray leading-28': loginType != item.type,
-                'text-24 c-fc-333 leading-36 font-medium':
-                  loginType == item.type
-              }"
-              @click="loginTypeChange(item)"
-            >
-              {{ item.title }}
+          <template v-else>
+            <div class="flex flex-row justify-center items-center pt-35 mb-50">
+              <div
+                v-for="(item, index) in loginTypeOptions"
+                :key="index"
+                class="cursor-pointer"
+                :class="{
+                  'mr-30': index < loginTypeOptions.length - 1,
+                  'text-18 c-fc-sgray leading-28': loginType != item.type,
+                  'text-24 c-fc-333 leading-36 font-medium':
+                    loginType == item.type
+                }"
+                @click="loginTypeChange(item)"
+              >
+                {{ item.title }}
+              </div>
             </div>
-          </div>
 
-          <el-form
-            ref="loginFormRef"
-            :model="loginForm"
-            :rules="loginRules"
-            label-position="left"
-            class="loginForm"
-          >
-            <component
-              :is="loginComponents[loginType]"
-              :login-form="loginForm"
-            />
-          </el-form>
-        </template>
+            <el-form
+              ref="loginFormRef"
+              :model="loginForm"
+              :rules="loginRules"
+              label-position="left"
+              class="loginForm"
+            >
+              <component
+                :is="loginComponents[loginType]"
+                :login-form="loginForm"
+              />
+              <!-- <el-form-item prop="captcha" class="captcha_wrap">
+                <el-input
+                  v-model="loginForm.captcha"
+                  maxlength="14"
+                  placeholder="请输入验证码"
+                  @keyup.enter="handleLogin"
+                ></el-input>
 
-        <div class="flex flex-row items-center justify-between mb-10 text-14">
-          <el-checkbox v-model="isCheckedService">阅读并同意</el-checkbox>
+                <img
+                  :src="captchaImg"
+                  alt="验证码"
+                  title="点击图片重新获取验证码"
+                />
+              </el-form-item> -->
+            </el-form>
+          </template>
 
-          <div class="flex flex-row">
-            <div class="text-center c-fc-666">
+          <div class="flex flex-row items-center justify-between mb-10 text-14">
+            <div class="flex flex-row items-center">
+              <el-checkbox v-model="isCheckedService"></el-checkbox>
+              <span class="ml-10">阅读并同意</span>
+              <useRule
+                :id="62"
+                name="《服务协议》"
+                name-css="text-14 c-fc-blue"
+                :show-icon="false"
+              />
+            </div>
+
+            <div class="flex flex-row">
               <span
                 v-if="loginType === 'password'"
                 class="c-fc-blue cursor-pointer"
@@ -66,21 +89,21 @@
               >
                 忘记密码
               </span>
-            </div>
 
-            <span
-              class="c-fc-blue cursor-pointer"
-              @click="contactUsVisible = !contactUsVisible"
-              >联系我们</span
-            >
+              <span
+                class="ml-10 c-fc-blue cursor-pointer"
+                @click="contactUsVisible = !contactUsVisible"
+                >联系我们</span
+              >
+            </div>
           </div>
         </div>
       </div>
     </div>
 
     <div class="text-center c-fc-sgray text-14">
-      <p class="pb-23">-创客匠人 让商业更智能-</p>
-      <p>创客匠人版权所有 闽ICP备16007622号-1</p>
+      <p class="pb-23">-xxxx 激发平台无限潜能-</p>
+      <p>xxxx版权所有 闽ICP备xxxxxx号-1</p>
     </div>
   </div>
 </template>
@@ -89,11 +112,13 @@
 import { ref, reactive, markRaw } from 'vue'
 import type { FormInstance } from 'element-plus'
 
+import Http from '@/api/index'
 import { imgWebUrl } from '@/constants/global'
 
 import contactUs from './part/contactUs.vue'
 import password from './part/password.vue'
 import code from './part/code.vue'
+import useRule from '@/components/useRule.vue'
 
 import { useRouter } from 'vue-router'
 const router = useRouter()
@@ -138,7 +163,7 @@ const loginForm = reactive({
   mobile: '',
   // code: '',
   validCode: '', // 短信验证码
-  checkKey: '' // 时间戳，获取图形验证码用
+  checkKey: 0 // 时间戳，获取图形验证码用
 })
 
 const validateUsername = (rule: any, value: any, callback: any) => {
@@ -170,15 +195,41 @@ const loginRules = reactive({
   mobile: [{ required: true, trigger: 'blur', message: '请输入手机号' }],
   validCode: [{ required: true, trigger: 'blur', validator: validateCaptcha }]
 })
+
+// const isAdminLogin = computed(
+//   () => loginForm.username && loginForm.username.trim() === 'admin'
+// )
+
+// 验证码图片
+const captchaImg = ref<string>('')
+// const captchaGet = async () => {
+//   loginForm.checkKey = +new Date()
+
+//   const res = await Http.get(
+//     `/ttapi/admin/app/randomImage/${loginForm.checkKey}`
+//   )
+
+//   if (!res) return
+
+//   captchaImg.value = res.data
+//   loginForm.checkKey = 0
+// }
+
+const handleLogin = () => {
+  console.log('')
+}
 </script>
 
 <style lang="scss" scoped>
-.loginForm :deep(.el-input__inner) {
+.loginForm :deep(.el-input__wrapper) {
   padding-right: 0;
-  padding-bottom: 14px;
   padding-left: 0;
+  box-shadow: none;
+}
+
+.loginForm :deep(.el-input__wrapper .el-input__inner) {
+  padding-bottom: 14px;
   font-size: 16px;
-  border: 0;
   border-bottom: 1px solid #dbdee0;
 }
 
