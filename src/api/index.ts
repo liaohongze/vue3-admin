@@ -31,7 +31,8 @@ const config = {
   // 设置超时时间
   timeout: RequestEnums.TIMEOUT as number,
   // 跨域时候允许携带凭证
-  withCredentials: true
+  withCredentials: true,
+  url: ''
 }
 
 class RequestHttp {
@@ -48,10 +49,24 @@ class RequestHttp {
 
     this.service.interceptors.request.use(
       (config: AxiosRequestConfig) => {
+        const url = String(config.url)
+
+        if (
+          url.includes('kpapi0.ckjr001.com/api/admin/ttapi/') ||
+          url.includes('formalapi.ckjr001.com/api/admin/ttapi/')
+        ) {
+          // 抖音正式域名不一样，加个判断
+          config.url = url.replace(
+            import.meta.env.VITE_BASE_API,
+            import.meta.env.VITE_TIKTOK_API
+          )
+        }
+
         const token = localStorage.getItem('token') || ''
         return {
           ...config,
           headers: {
+            'X-Requested-Version': '20220825', // 抖店版本号
             'x-access-token': token // 请求头中携带token信息
           }
         }
