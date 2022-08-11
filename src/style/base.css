@@ -1,3 +1,9 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+@layer base {
+  .el-button {
+    background-color: var(--el-button-bg-color, var(--el-color-white))
+  }
+}
