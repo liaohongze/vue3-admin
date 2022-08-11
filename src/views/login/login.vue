@@ -20,54 +20,42 @@
       </div>
 
       <div class="flex-1 pt-20 pb-30 c-bg-white">
-        <div class="mx-auto w-400 px-10 sm:w-80p">
-          <contactUs v-if="contactUsVisible" v-model="contactUsVisible" />
-
-          <template v-else>
-            <div class="flex flex-row justify-center items-center pt-35 mb-50">
-              <div
-                v-for="(item, index) in loginTypeOptions"
-                :key="index"
-                class="cursor-pointer"
-                :class="{
-                  'mr-30': index < loginTypeOptions.length - 1,
-                  'text-18 c-fc-sgray leading-28': loginType != item.type,
-                  'text-24 c-fc-333 leading-36 font-medium':
-                    loginType == item.type
-                }"
-                @click="loginTypeChange(item)"
-              >
-                {{ item.title }}
-              </div>
-            </div>
-
-            <el-form
-              ref="loginFormRef"
-              :model="loginForm"
-              :rules="loginRules"
-              label-position="left"
-              class="loginForm"
+        <div class="relative mx-auto w-400 px-10 sm:w-80p">
+          <div class="flex flex-row justify-center items-center pt-35 mb-50">
+            <div
+              v-for="(item, index) in loginTypeOptions"
+              :key="index"
+              class="cursor-pointer"
+              :class="{
+                'mr-30': index < loginTypeOptions.length - 1,
+                'text-18 c-fc-sgray leading-28': loginType != item.type,
+                'text-24 c-fc-333 leading-36 font-medium':
+                  loginType == item.type
+              }"
+              @click="loginTypeChange(item)"
             >
-              <component
-                :is="loginComponents[loginType]"
-                :login-form="loginForm"
-              />
-              <!-- <el-form-item prop="captcha" class="captcha_wrap">
-                <el-input
-                  v-model="loginForm.captcha"
-                  maxlength="14"
-                  placeholder="请输入验证码"
-                  @keyup.enter="handleLogin"
-                ></el-input>
+              {{ item.title }}
+            </div>
+          </div>
 
-                <img
-                  :src="captchaImg"
-                  alt="验证码"
-                  title="点击图片重新获取验证码"
-                />
-              </el-form-item> -->
-            </el-form>
-          </template>
+          <el-form
+            ref="loginFormRef"
+            :model="loginForm"
+            :rules="loginRules"
+            label-position="left"
+            class="loginForm"
+          >
+            <component
+              :is="loginComponents[loginType]"
+              v-model:passwordRemember="passwordRemember"
+              :login-form="loginForm"
+              @handle-login="handleLogin"
+            />
+
+            <el-button type="primary" class="w-full h-48 my-16 text-16"
+              >登录</el-button
+            >
+          </el-form>
 
           <div class="flex flex-row items-center justify-between mb-10 text-14">
             <div class="flex flex-row items-center">
@@ -97,6 +85,12 @@
               >
             </div>
           </div>
+
+          <contactUs
+            v-if="contactUsVisible"
+            v-model="contactUsVisible"
+            class="top-0 left-0"
+          />
         </div>
       </div>
     </div>
@@ -112,7 +106,6 @@
 import { ref, reactive, markRaw } from 'vue'
 import type { FormInstance } from 'element-plus'
 
-import Http from '@/api/index'
 import { imgWebUrl } from '@/constants/global'
 
 import contactUs from './part/contactUs.vue'
@@ -200,24 +193,11 @@ const loginRules = reactive({
 //   () => loginForm.username && loginForm.username.trim() === 'admin'
 // )
 
-// 验证码图片
-const captchaImg = ref<string>('')
-// const captchaGet = async () => {
-//   loginForm.checkKey = +new Date()
-
-//   const res = await Http.get(
-//     `/ttapi/admin/app/randomImage/${loginForm.checkKey}`
-//   )
-
-//   if (!res) return
-
-//   captchaImg.value = res.data
-//   loginForm.checkKey = 0
-// }
-
 const handleLogin = () => {
   console.log('')
 }
+
+const passwordRemember = ref<boolean>(false)
 </script>
 
 <style lang="scss" scoped>

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative w-full h-400 mt-15 mb-20 text-center rounded-10 c-box-shadow4"
+    class="absolute w-full h-400 mt-15 mb-20 text-center bg-white rounded-10 c-box-shadow4"
   >
     <img
       src="@/assets/logo/wechatLogo.png"
@@ -9,9 +9,12 @@
       alt=""
     />
 
-    <span class="absolute contact-close pointer" @click="close"
-      ><i class="el-icon-close text-24 c-fc-666"></i
-    ></span>
+    <el-icon
+      :size="18"
+      class="absolute contact-close cursor-pointer"
+      @click="close"
+      ><Close
+    /></el-icon>
 
     <p class="pt-60 mb-30 text-24 leading-30 c-fc-333 font-medium">联系我们</p>
 
@@ -31,6 +34,7 @@
 
 <script lang="ts" setup>
 import { imgWebUrl } from '@/constants/global'
+import { Close } from '@element-plus/icons-vue'
 
 type Props = {
   modelValue: boolean
@@ -40,11 +44,29 @@ defineProps<Props>()
 const emit = defineEmits(['update:modelValue'])
 
 const close = () => {
-  emit('update:modelValue', 1)
+  emit('update:modelValue', false)
 }
 </script>
 
 <style lang="scss" scoped>
+.contact-close {
+  right: 10px;
+  top: 10px;
+  z-index: 1;
+}
+.contact-close:hover {
+  // hover的时候关闭按钮旋转一圈
+  transform: rotate(180deg);
+  -ms-transform: rotate(180deg); /* IE 9 */
+  -moz-transform: rotate(180deg); /* Firefox */
+  -webkit-transform: rotate(180deg); /* Safari 和 Chrome */
+  -o-transform: rotate(180deg); /* Opera */
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
+}
 .contact-us::after {
   position: absolute;
   bottom: -20px;
