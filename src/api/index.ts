@@ -6,8 +6,8 @@ import axios, {
 } from 'axios'
 import { ElMessage } from 'element-plus'
 
-import { useUserStore } from '@/stores/user'
-const userStore = useUserStore()
+// import { useUserStore } from '@/stores/user'
+// const userStore = useUserStore()
 
 // 数据返回的接口
 // 定义请求响应参数，不含data
@@ -58,32 +58,8 @@ class RequestHttp {
     this.service.interceptors.request.use(
       (config: AxiosRequestConfig) => {
         const headers: IHeaders = {}
-        const url = String(config.url)
 
-        if (
-          url.includes('kpapi0.ckjr001.com/api/admin/ttapi/') ||
-          url.includes('formalapi.ckjr001.com/api/admin/ttapi/')
-        ) {
-          // 抖音正式域名不一样，加个判断
-          config.url = url.replace(
-            import.meta.env.VITE_BASE_API,
-            import.meta.env.VITE_TIKTOK_API
-          )
-        }
-
-        const { appId, userId, companyId } = userStore.appInfo
-        if (appId) {
-          const pathUrl = encodeURIComponent(window.location.pathname)
-
-          headers['X-DMP'] = `
-            u=${userId}&
-            c=${companyId}&
-            url=${pathUrl}&
-            chl=admtp
-          `
-        }
-
-        const token = localStorage.getItem('tiktokAccountType') || ''
+        const token = localStorage.getItem('token') || ''
         if (token) {
           headers.Authorization = `Bearer ${token}`
         }
@@ -91,8 +67,7 @@ class RequestHttp {
         return {
           ...config,
           headers: {
-            ...headers,
-            'X-Requested-Version': '20220825' // 抖店版本号
+            ...headers
           }
         }
       },
