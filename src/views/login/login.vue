@@ -9,7 +9,7 @@
     </div>
 
     <div
-      class="flex flex-row w-1000 mx-auto rounded-10 overflow-hidden c-box-shadow3 sm:w-full sm:mt-20"
+      class="flex w-1000 mx-auto rounded-10 overflow-hidden c-box-shadow3 sm:w-full sm:mt-20"
     >
       <div class="w-420 sm:hidden">
         <img
@@ -20,8 +20,8 @@
       </div>
 
       <div class="flex-1 pt-20 pb-30 c-bg-white">
-        <div class="relative mx-auto w-400 px-10 sm:w-80p">
-          <div class="flex flex-row justify-center items-center pt-35 mb-50">
+        <div class="mx-auto w-400 px-10 sm:w-80p">
+          <div class="flex justify-center items-center pt-35 mb-50">
             <div
               v-for="(item, index) in loginTypeOptions"
               :key="index"
@@ -57,8 +57,8 @@
             >
           </el-form>
 
-          <div class="flex flex-row items-center justify-between mb-10 text-14">
-            <div class="flex flex-row items-center">
+          <div class="flex items-center justify-between mb-10 text-14">
+            <div class="flex items-center">
               <el-checkbox v-model="isCheckedService"></el-checkbox>
               <span class="ml-10">阅读并同意</span>
               <useRule
@@ -69,28 +69,18 @@
               />
             </div>
 
-            <div class="flex flex-row">
+            <div class="flex">
               <span
                 v-if="loginType === 'password'"
-                class="c-fc-blue cursor-pointer"
+                class="mr-10 c-fc-blue cursor-pointer"
                 @click="modifyPassword"
               >
                 忘记密码
               </span>
 
-              <span
-                class="ml-10 c-fc-blue cursor-pointer"
-                @click="contactUsVisible = !contactUsVisible"
-                >联系我们</span
-              >
+              <contactUs>联系我们</contactUs>
             </div>
           </div>
-
-          <contactUs
-            v-if="contactUsVisible"
-            v-model="contactUsVisible"
-            class="top-0 left-0"
-          />
         </div>
       </div>
     </div>
@@ -116,9 +106,6 @@ import useRule from '@/components/useRule.vue'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 
-// const loadCaptcha = () => {
-
-// }
 const isCheckedService = ref<boolean>(true)
 
 const loginComponents: Record<string, any> = reactive({
@@ -134,7 +121,6 @@ const loginTypeOptions = reactive([
 ])
 
 const loginTypeChange = (item: any) => {
-  // loadCaptcha()
   loginType.value = item.type
 }
 // 切换登录方式 结束
@@ -143,17 +129,15 @@ const modifyPassword = () => {
   router.push({ name: 'modifyPassword' })
 }
 
-const contactUsVisible = ref<boolean>(false)
-
 // 登录
 const loginFormRef = ref<FormInstance>()
 
 const loginForm = reactive({
   username: '',
   password: '',
+  mobile: '',
   captcha: '',
   captchaKey: null,
-  mobile: '',
   // code: '',
   validCode: '', // 短信验证码
   checkKey: 0 // 时间戳，获取图形验证码用

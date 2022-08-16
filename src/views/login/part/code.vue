@@ -14,8 +14,11 @@
 <script setup lang="ts">
 import { objectParams } from '@/hooks/autoSetProps'
 
+import captchaInput from '@/views/login/part/captchaInput.vue'
+
 type Props = {
   loginForm: Record<string, any>
+  passwordRemember: boolean
 }
 
 const props = defineProps<Props>()
