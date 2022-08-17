@@ -9,6 +9,7 @@
     ></el-input>
 
     <img
+      v-loading="loading"
       :src="captchaImg"
       class="w-136 h-50 ml-20 cursor-pointer"
       alt="验证码"
@@ -41,17 +42,19 @@ const formProxy = baseParams(
   emits
 )
 
+const loading = ref<boolean>(false)
 // 验证码图片
 const captchaImg = ref<string>('')
 const captchaGet = async () => {
   const timekey = +new Date()
 
+  loading.value = true
   const res = await getRandomImage(timekey)
-
+  loading.value = false
   if (!res) return
 
   formProxy.checkKey = timekey
-  captchaImg.value = res.data
+  captchaImg.value = res
 }
 
 onMounted(captchaGet)

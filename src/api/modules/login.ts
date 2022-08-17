@@ -39,3 +39,14 @@ interface checkExistReqForm {
 export const checkExist: any = (params: checkExistReqForm) => {
   return axios.get<resData>('/ttapi/admin/app/checkExist', params)
 }
+
+interface validCodeReqForm {
+  mobile: string
+}
+export const validSmsCode: any = (
+  params: validCodeReqForm,
+  smsType: number
+) => {
+  // smsType验证码类型 100：登录 500：重置密码
+  return axios.get<resData>(`/ttapi/admin/common/validCode/${smsType}`, params)
+}

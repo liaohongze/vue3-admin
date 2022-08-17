@@ -9,12 +9,25 @@
       v-model:checkKey="form.checkKey"
     />
   </el-form-item>
+
+  <el-form-item prop="captcha">
+    <smsCodeInput
+      v-model="form.validCode"
+      :params="{
+        username: loginForm.username,
+        captcha: loginForm.captcha,
+        checkKey: loginForm.checkKey
+      }"
+      @handle-login="emits('handleLogin')"
+    />
+  </el-form-item>
 </template>
 
 <script setup lang="ts">
 import { objectParams } from '@/hooks/autoSetProps'
 
 import captchaInput from '@/views/login/part/captchaInput.vue'
+import smsCodeInput from '@/views/login/part/smsCodeInput.vue'
 
 type Props = {
   loginForm: Record<string, any>

@@ -47,7 +47,6 @@
           >
             <component
               :is="loginComponents[loginType]"
-              v-model:passwordRemember="passwordRemember"
               :login-form="loginForm"
               @handle-login="handleLogin"
             />
@@ -85,10 +84,7 @@
       </div>
     </div>
 
-    <div class="text-center c-fc-sgray text-14">
-      <p class="pb-23">-xxxx 激发平台无限潜能-</p>
-      <p>xxxx版权所有 闽ICP备xxxxxx号-1</p>
-    </div>
+    <copyright />
   </div>
 </template>
 
@@ -101,6 +97,7 @@ import { imgWebUrl } from '@/constants/global'
 import contactUs from './part/contactUs.vue'
 import password from './part/password.vue'
 import code from './part/code.vue'
+import copyright from './part/copyright.vue'
 import useRule from '@/components/useRule.vue'
 
 import { useRouter } from 'vue-router'
@@ -122,6 +119,9 @@ const loginTypeOptions = reactive([
 
 const loginTypeChange = (item: any) => {
   loginType.value = item.type
+
+  // 清除一下已经输入的验证码
+  loginForm.captcha = ''
 }
 // 切换登录方式 结束
 
@@ -136,11 +136,10 @@ const loginForm = reactive({
   username: '',
   password: '',
   mobile: '',
+  checkKey: 0, // 时间戳，获取图形验证码用
   captcha: '',
-  captchaKey: null,
   // code: '',
-  validCode: '', // 短信验证码
-  checkKey: 0 // 时间戳，获取图形验证码用
+  validCode: '' // 短信验证码
 })
 
 const validateUsername = (rule: any, value: any, callback: any) => {
@@ -180,8 +179,6 @@ const loginRules = reactive({
 const handleLogin = () => {
   console.log('')
 }
-
-const passwordRemember = ref<boolean>(false)
 </script>
 
 <style lang="scss" scoped>
