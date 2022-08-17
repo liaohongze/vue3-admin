@@ -9,12 +9,13 @@
     </div>
 
     <div
-      class="w-600 mx-auto py-40 px-120 c-bg-white rounded-10 c-box-shadow4 sm:w-full"
+      class="w-600 mx-auto py-40 px-100 c-bg-white rounded-10 c-box-shadow4 sm:w-full"
     >
       <p class="text-center text-16 c-fc-333 font-semibold mb-30">重置密码</p>
-      <div v-if="successStatus"></div>
+      <div v-if="successStatus" class="flex flex-col items-center py-40"></div>
+
       <template v-else>
-        <el-form :model="form" :rules="rules">
+        <el-form :model="form" :rules="rules" class="modifyForm">
           <el-form-item prop="mobile">
             <el-input
               v-model="form.mobile"
@@ -135,3 +136,26 @@ const captcha = reactive({
   checkKey: null
 })
 </script>
+
+<style lang="scss" scoped>
+.modifyForm :deep(.el-input__wrapper) {
+  padding-right: 0;
+  padding-left: 0;
+  box-shadow: none;
+}
+
+.modifyForm :deep(.el-input__wrapper .el-input__inner) {
+  padding-bottom: 14px;
+  font-size: 16px;
+  border-bottom: 1px solid #dbdee0;
+}
+
+.modifyForm :deep(.el-form-item.is-error .el-input__inner) {
+  border: 0;
+  border-bottom: 1px solid #f56c6c;
+}
+
+.modifyForm :deep(.el-form-item) {
+  margin-bottom: 27px;
+}
+</style>
