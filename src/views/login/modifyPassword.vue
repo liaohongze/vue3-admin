@@ -15,12 +15,17 @@
       <div v-if="successStatus" class="flex flex-col items-center py-40"></div>
 
       <template v-else>
-        <el-form :model="form" :rules="rules" class="modifyForm">
-          <el-form-item prop="mobile">
+        <el-form
+          ref="modifyForm"
+          :model="form"
+          :rules="rules"
+          class="modifyForm"
+        >
+          <el-form-item prop="username">
             <el-input
-              v-model="form.mobile"
+              v-model="form.username"
               class="el-input"
-              name="mobile"
+              name="username"
               type="tel"
               placeholder="请输入手机号码"
               auto-complete="off"
@@ -34,12 +39,12 @@
             />
           </el-form-item>
 
-          <el-form-item prop="code">
+          <el-form-item prop="validCode">
             <smsCodeInput
-              v-model="form.code"
+              v-model="form.validCode"
               :sms-type="500"
               :params="{
-                mobile: form.mobile,
+                mobile: form.username,
                 captcha: captcha.captcha,
                 checkKey: captcha.checkKey
               }"
@@ -50,13 +55,30 @@
             <passwordInput v-model="form.password" />
           </el-form-item>
 
-          <el-form-item prop="confirmPwd">
+          <el-form-item prop="confirmPassword">
             <passwordInput
-              v-model="form.confirmPwd"
+              v-model="form.confirmPassword"
               placeholder="请输入确认密码"
             />
           </el-form-item>
         </el-form>
+
+        <el-button
+          type="primary"
+          class="w-full h-48 my-16 text-16"
+          @click="confirm(modifyForm)"
+          >保存</el-button
+        >
+
+        <div>
+          <el-button
+            type="primary"
+            link
+            class="w-full h-48 text-16"
+            @click="$router.go(-1)"
+            >返回</el-button
+          >
+        </div>
       </template>
     </div>
 
@@ -65,21 +87,25 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref, reactive, toRaw } from 'vue'
 import { isPhoneNumber } from '@/utils/validate'
+import handleFormError from '@/utils/handleFormError'
 import copyright from './part/copyright.vue'
 
 import passwordInput from '@/views/login/part/passwordInput.vue'
 import captchaInput from '@/views/login/part/captchaInput.vue'
 import smsCodeInput from '@/views/login/part/smsCodeInput.vue'
 
+import type { FormInstance, FormRules } from 'element-plus'
+
 const successStatus = ref<boolean>(false)
 
+const modifyForm = ref<FormInstance>()
 const form = reactive({
-  mobile: '',
+  username: '',
   password: '',
-  confirmPwd: '',
-  code: ''
+  confirmPassword: '',
+  validCode: ''
 })
 
 const validateTel = (rule: any, value: any, callback: any) => {
@@ -119,22 +145,31 @@ const validatePass2 = (rule: any, value: any, callback: any) => {
 }
 const validateCaptcha = (rule: any, value: any, callback: any) => {
   if (!value) {
-    callback(new Error('请输入验证码'))
+    callback(new Error('请输入短信验证码'))
   } else {
     callback()
   }
 }
-const rules = reactive({
-  mobile: [{ required: true, trigger: 'blur', validator: validateTel }],
+const rules = reactive<FormRules>({
+  username: [{ required: true, trigger: 'blur', validator: validateTel }],
+  validCode: [{ required: true, trigger: 'blur', validator: validateCaptcha }],
   password: [{ required: true, trigger: 'blur', validator: validatePassword }],
-  confirmPwd: [{ required: true, trigger: 'blur', validator: validatePass2 }],
-  code: [{ required: true, trigger: 'blur', validator: validateCaptcha }]
+  confirmPassword: [
+    { required: true, trigger: 'blur', validator: validatePass2 }
+  ]
 })
 
 const captcha = reactive({
   captcha: '',
   checkKey: null
 })
+
+const confirm = async (formEl: FormInstance | undefined) => {
+  const valid = await formEl
+    ?.validate()
+    .catch(err => handleFormError(err, toRaw(rules)))
+  if (!valid) return
+}
 </script>
 
 <style lang="scss" scoped>

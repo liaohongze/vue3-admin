@@ -50,3 +50,16 @@ export const validSmsCode: any = (
   // smsType验证码类型 100：登录 500：重置密码
   return axios.get<resData>(`/ttapi/admin/common/validCode/${smsType}`, params)
 }
+
+interface resetPwdReqForm {
+  username: string //手机号
+  captcha: string //图形验证码
+  checkKey: string //获取图形验证码的时间戳
+  validCode: string //短信验证码
+  password: string //密码
+  confirmPassword: string //确认密码
+}
+
+export const resetPassword: any = (params: resetPwdReqForm) => {
+  return axios.post<resData>('/ttapi/admin/app/resetPwd', params)
+}
